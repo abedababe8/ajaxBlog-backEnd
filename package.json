@@ -1,0 +1,20 @@
+{
+  "name": "ajaxBlog-backEnd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abedababe8/ajaxBlog-backEnd.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abedababe8/ajaxBlog-backEnd/issues"
+  },
+  "homepage": "https://github.com/abedababe8/ajaxBlog-backEnd#readme"
+}
