@@ -5,42 +5,42 @@ function getAll (req, res, next) {
 }
 
 function getOne (req, res, next) {
-  const book = model.getOne(req.params.title)
-  if(book.data){
-    return res.status(200).send({ data: book.data })
+  const post = model.getOne(req.params.id)
+  if(post.data){
+    return res.status(200).send({ data: post.data })
   }
-  else if(book.error){
-    return next({ status: 404, message: book.error })
+  else if(post.error){
+    return next({ status: 404, message: post.error })
   }
 }
 
 function create (req, res, next) {
-  const book = model.create(req.body.title, req.body.contents)
-  if (book.error){
-    return res.status(400).send({data: book.error})
+  const post = model.create(req.body.title, req.body.contents)
+  if (post.error){
+    return res.status(400).send({data: post.error})
   }
-  if (book.data){
-    return res.status(201).send({data: book.data})
+  if (post.data){
+    return res.status(201).send({data: post.data})
   }
 }
 
 function update (req, res, next) {
-  const book = model.update(req.body.title, req.body.contents)
-  if(book.data){
-    return res.status(200).send({ data: book.data })
+  const post = model.update(req.params.id, req.body.title, req.body.contents)
+  if(post.data){
+    return res.status(200).send({ data: post.data })
   }
-  else if(book.error){
-    return next({ status: 404, message: book.error })
+  else if(post.error){
+    return next({ status: 404, message: post.error })
   }
 }
 
 function destroy (req, res, next) {
-  const book = model.destroy(req.params.title)
-  if(book.data){
-    return res.status(200).send({ data: book.data })
+  const post = model.destroy(req.params.id)
+  if(post.data){
+    return res.status(200).send({ data: post.data })
   }
-  else if(book.error){
-    return next({ status: 404, message: book.error })
+  else if(post.error){
+    return next({ status: 404, message: post.error })
   }
 }
 

@@ -11,29 +11,31 @@ function getAll(){
   return { posts }
 }
 
-function getOne(title){
+function getOne(id){
   const workableData = fs.readFileSync(file, 'utf-8')
   const posts = JSON.parse(workableData).posts
-  const post = posts.find(post => post.title === title)
+  const post = posts.find(post => post.id === id)
   return post ? { data: post } : { error: 'post not Found'}
 }
 
 function create(title, contents){
   const errors = []
   if (!title){
-    errors.push('please name the post')
+    errors.push('please title the post')
   }
   if (!contents){
-    errors.push('please include short description')
+    errors.push('please include contents for the post')
   }
 
   if (errors.length > 0){
+    console.log(errors);
     return {error: errors}
   }
 
 
   const post = {title,
           contents,
+          id: shortid.generate()
         }
 
   const workableData = fs.readFileSync(file, 'utf-8')
@@ -42,14 +44,14 @@ function create(title, contents){
   posts.push(post)
   const json = JSON.stringify(newParsedFile)
   fs.writeFileSync(file, json)
-  return { post }
+  return { data: post }
 }
 
-function update(title, contents){
+function update(id, title, contents){
   const workableData = fs.readFileSync(file, 'utf-8')
   const wholeFile = JSON.parse(workableData)
   const posts = wholeFile.posts
-  const post = posts.find(post => post.title === title)
+  const post = posts.find(post => post.id === id)
   if (post){
     if (title){
       post.title = title
@@ -65,11 +67,11 @@ function update(title, contents){
   }
 }
 
-function destroy (title){
+function destroy (id){
   const workableData = fs.readFileSync(file, 'utf-8')
   const wholeFile = JSON.parse(workableData)
   const posts = wholeFile.posts
-  const post = posts.find(post => post.title === title)
+  const post = posts.find(post => post.id === id)
   if (post){
     const deletedPost = posts.splice(posts.indexOf(post), 1)
     const json = JSON.stringify(wholeFile)
